@@ -1,76 +1,193 @@
-# Smart Grid Viewer (Chrome MV3)
+# Smart Grid Viewer  
+### Multi‑Site Browser Dashboard Extension  
+Repository: **https://github.com/smartboy223/browser-extention-Smart-Grid-View**
 
-Multi-tab grid viewer that embeds selected sites into a tiled layout with crisp per-iframe scaling. Designed for dashboards, monitoring, and multi-site workflows.
+---
 
-## Features
-- Select tabs from the current window and open them in a grid
-- Layout presets: auto square-ish, left/right, 2x2
-- Per-iframe zoom with high-resolution pre-rendering (no blur)
-- Fit modes: `native`, `contain`, `cover` with centering
-- Aspect modes: `fill` or `square`
-- Drag-and-drop reordering with FLIP animation
-- Theme toggle and lightweight overlay controls
-- Save/load named grids and last session via `chrome.storage.local`
+<p align="center">
+  <img src="icon.png" width="140" alt="Smart Grid Viewer Icon"/>
+</p>
 
-## Install (Chrome)
-- Open `chrome://extensions`
-- Enable `Developer mode`
-- Click `Load unpacked` and select this folder (`multi-tab-grid-v6`)
-- The extension icon opens the popup (`popup.html`)
+---
 
-## Usage
-1. Open the popup, select tabs, choose a layout, and click Open Grid
-2. The viewer (`grid.html`) renders each site in a cell
-3. Use the floating controls:
-   - `◑` Toggle theme
-   - `↔` Toggle fit (`native → contain → cover`)
-   - `□` Toggle aspect (`fill/square`)
-   - `＋/－` Zoom per-iframe
-4. Drag cells by the small header’s grab handle to reorder
-5. Save and load grid profiles in the popup
+## ⭐ Overview
+Smart Grid Viewer is a **Chrome & Edge browser extension** that lets you open multiple websites in a **clean, resizable, high‑resolution grid layout**.
 
-## Resolution Quality (Important)
-- The viewer uses pre-render scaling per iframe instead of page zoom
-- Each iframe is rendered at a larger CSS size first, then visually scaled to fit, keeping text sharp across zoom levels and DPI
-- Core logic:
-  - Native mode renders at `cellSize / zoomScale`, then `transform: scale(zoomScale)`
-    - See `grid.js:259–268`
-  - Fit modes render at `targetSize / (fitScale × zoomScale)`, then center and `scale(finalScale)`
-    - See `grid.js:239–254`
-- Overlay/UI are decoupled from zoom; no `document.body.style.zoom`
-  - See `grid.js:22–27`
+Perfect for:
+- Security monitoring dashboards  
+- Trading dashboards  
+- Multi‑site supervision  
+- CCTV web UIs  
+- Social media multi‑panels  
+- Productivity multi‑views  
 
-## Storage Keys
-- `tabGridConfig` — active grid `{ tabs, layout, _gridName? }`
-- `tabGridSavedGrids` — saved profiles list
-- `tabGridLastConfig` — last-used grid metadata
-- `tabGridFit` — `{ enabled, mode, targetWidth, targetHeight, aspect }`
-- `tabGridAspect` — `'fill' | 'square'`
-- `tabGridZoom` — numeric zoom factor used by per-iframe scaling
+Built with **crisp pre-render scaling** to avoid the typical blur that happens in Chrome when zooming out pages.
 
-## File Layout
-- `manifest.json` — MV3 manifest; permissions: `tabs`, `storage`
-- `popup.html` / `popup.js` — tab selection, layout, save/load profiles
-- `grid.html` / `grid.js` — tiled viewer and controls
-- `styles.css` — shared styling
-- `icon.png` — extension icon
+---
 
-## Limitations
-- Some sites block embedding in an iframe; the viewer shows a fallback with an “Open in tab” link
-- Very small zooms across many iframes can increase GPU work; consider moderate scales or fewer cells for heavy dashboards
+## 🚀 Features
+### 🔹 Smart Grid Rendering
+- High‑resolution iframe rendering (no blur)
+- Internal pre-render logic for crisp text & UI
+- Full GPU-accelerated transforms
+- Works on Chrome & Edge
 
-## Development
-- No build tooling; static `HTML/CSS/JS` only
-- Make changes, reload the extension in `chrome://extensions`
-- Code references:
-  - Grid layout build: `grid.js:35–207`
-  - Fit/aspect logic: `grid.js:209–230`, `grid.js:230–270`
-  - Zoom handling: `grid.js:376–383`
-  - Drag reorder FLIP: `grid.js:272–303`
+### 🔹 Layout Controls
+- Auto grid
+- Two‑column split
+- 2×2 grid
+- Square mode or fill mode
+- Contain / Cover / Native fitting modes
 
-## Changelog (Latest)
-- Removed page-level zoom; added crisp per-iframe pre-render scaling
-- Updated fit modes to pre-render before transform scaling
-- Decoupled overlays from zoom; cleaner UI at any DPI
-- Minor CSS tweak for smoother transforms (`backface-visibility: hidden` on iframes)
+### 🔹 Zoom Controls
+- True sharp zoom (not Chrome page zoom)
+- Per‑iframe resolution scaling
 
+### 🔹 Tab Management
+- Select tabs to include in the grid
+- Filter tabs
+- Rename tabs (custom labels)
+- Drag to reorder
+- Save named grid profiles
+- Load last session automatically
+
+### 🔹 UX
+- Floating tool icons
+- Light & dark mode
+- Fast grid rebuild
+- Smooth drag‑and‑drop
+
+---
+
+## 📦 Installation (Chrome or Edge)
+
+1. Download or clone this repository:  
+   **https://github.com/smartboy223/browser-extention-Smart-Grid-View**
+
+2. Open:
+   ```
+   chrome://extensions/
+   ```
+   or  
+   ```
+   edge://extensions/
+   ```
+
+3. Enable **Developer Mode** (top-right).
+
+4. Click **Load unpacked**.
+
+5. Select the extension folder.
+
+6. The icon will appear in the toolbar — click it to open the popup.
+
+---
+
+## 🧩 Usage
+
+### 1️⃣ Open the Popup  
+Choose the tabs you want, rename labels, and pick a layout.
+
+### 2️⃣ Click **Open / Update Grid**  
+This loads the main dashboard (`grid.html`).
+
+### 3️⃣ Use the Floating Controls  
+| Button | Function |
+|--------|----------|
+| ◑ | Toggle theme |
+| ↔ | Fit mode: native → contain → cover |
+| □ | Aspect mode: fill ↔ square |
+| ＋ / － | Grid zoom controls (crisp scaling) |
+
+### 4️⃣ Drag to Reorder  
+Use the round handle on the header text.
+
+### 5️⃣ Save Profiles  
+Save your multi-tab setup and reload any time.
+
+---
+
+## 🖼 High‑Resolution Rendering (Important)
+
+Chrome normally blurs content when zoomed out.  
+This extension uses **pre-render scaling**:
+
+### ✔ Render iframe at *large* internal size  
+### ✔ Then scale down visually  
+### ✔ Result: Sharp text at any grid size  
+### ✔ No loss of quality on 1080p, 2K, or 4K monitors  
+
+Code reference (from `grid.js`):
+
+```js
+renderW = cw / scale;
+renderH = ch / scale;
+
+iframe.style.width = renderW + 'px';
+iframe.style.height = renderH + 'px';
+iframe.style.transform = 'scale(' + scale + ')';
+```
+
+This ensures every iframe stays sharp even at 20–30% visual size.
+
+---
+
+## 🗂 Project Structure
+```
+📁 Smart-Grid-View
+ ├── grid.html         # Viewer layout
+ ├── popup.html        # Tab selection UI
+ ├── grid.js           # Core grid engine
+ ├── popup.js          # Tab manager & profiles
+ ├── styles.css        # Unified styles
+ ├── manifest.json     # Chrome MV3 manifest
+ └── icon.png          # Extension icon
+```
+
+---
+
+## 💾 Storage Keys
+- **tabGridConfig** — active grid configuration  
+- **tabGridSavedGrids** — list of saved profiles  
+- **tabGridLastConfig** — last active grid  
+- **tabGridFit** — fit mode & dimensions  
+- **tabGridAspect** — aspect mode  
+- **tabGridZoom** — zoom level  
+
+---
+
+## ⚠️ Limitations
+- Some websites block being embedded in iframes  
+- Extreme multi‑grid setups (16–25 windows) use more GPU  
+- Browsers may throttle background iframes  
+
+---
+
+## 🛠 Development Notes
+- 100% pure HTML/CSS/JS  
+- MV3 (Manifest v3) compliant  
+- No build steps needed  
+- Works offline after installation
+
+### Key Files:
+- Grid creation: `grid.js` (lines ~40–200)
+- Fit logic: `grid.js` (~210–280)
+- Zoom scaling: `grid.js` (~380)
+- Drag + reorder: `grid.js` (~300)
+- Popup logic: `popup.js` (tab manager)
+
+---
+
+## 📜 Changelog (Latest)
+- Added high-resolution pre-render scaling system
+- Improved fit modes (contain, cover, native)
+- Cleaner toolbar UI
+- Faster grid rebuild process
+- Enhanced drag-and-drop handling
+- Updated README and documentation
+
+---
+
+## ❤️ Author
+GitHub: **https://github.com/smartboy223**  
+Project: **Smart Grid View Extension**
