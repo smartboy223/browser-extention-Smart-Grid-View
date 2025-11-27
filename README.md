@@ -1,69 +1,71 @@
 # Multi-Tab Grid Manager (Browser Extension)
 
-A powerful Browser extension that lets you organize, label, reorder, and display tabs in a fully customizable grid layout — perfect for productivity, monitoring dashboards, SOC operations, research, and multi-window workflows.
+A browser extension that arranges tabs into customizable grid layouts with tagging, reordering, persistent saving, and multi-window management across all Chromium-based browsers.
 
-This project provides a clean UI, persistent storage, tag editing, grid presets, and real-time layout updates without reloading your pages.
+---
 
 ## ✨ Features
 
-### 🧩 Custom Grid Layout
-- Arrange open tabs in rows × columns
-- Live preview of the grid layout
-- Each window is positioned and resized automatically
-- Tabs scale to 100% of their grid space
-
-### 🏷️ Tab Tagging System
-- Add and edit labels
-- Centered tag display
-- Real-time updates
-
-### 🔄 Reorder Tabs & Grids
-- Drag-and-drop reorder
-- Save custom orderings
-- Reload layout anytime
-
-### 💾 Persistent Storage
-Automatically saves:
-- Tags
-- Tab order
-- Grid configuration
-- Selected tabs
-- Styles & preferences
-
-### 🖥️ Multi-Window Grid Execution
-- Opens selected tabs in separate windows
-- Perfect fit scaling
-- No forced reload
-
-### ✔ Select / Deselect All
-Fast multi-selection.
+- Custom grid layouts (rows × columns)
+- Tag editing & centered labels
+- Reorder tabs and windows
+- Persistent saving (tags, layout, selections)
+- Multi-window execution with perfect 100% scaling
+- Select / Deselect all
+- Works on all Chromium browsers (Chrome, Edge, Brave, Opera, Vivaldi)
 
 ---
 
-## 📂 Project Structure
+## 📥 Download & Install (All Chromium Browsers)
 
-```
-multi-tab-grid/
-├── manifest.json
-├── popup.html
-├── popup.js
-├── grid.html
-├── grid.js
-├── styles.css
-├── icon.png
-├── FILES.txt
-└── INSTRUCTIONS.txt
+### 1. Download the Extension
+Download the latest release ZIP from your GitHub repo:
+
+**Releases → Download ZIP**
+
+Or clone:
+
+```bash
+git clone https://github.com/USERNAME/REPO-NAME.git
 ```
 
 ---
 
-## 🚀 How It Works
+### 2. Extract the Files
+Unzip the folder. You must see:
 
-1. Open popup (click extension icon)
-2. Select tabs + edit tags
-3. Choose grid layout
-4. Apply grid
-5. Layout is saved automatically
+```
+manifest.json
+popup.html
+popup.js
+grid.html
+grid.js
+styles.css
+icon.png
+```
+
+---
+
+### 3. Load the Extension (Developer Mode)
+
+#### Chrome / Edge / Brave / Opera / Vivaldi:
+1. Go to:  
+   `chrome://extensions/`  
+   (or `edge://extensions/`, `brave://extensions/`, etc.)
+2. Enable **Developer Mode**
+3. Click **Load unpacked**
+4. Select the extracted folder
+
+The extension will appear in your toolbar.
+
+---
+
+## 🚀 Usage
+1. Click the extension icon  
+2. Select tabs & edit labels  
+3. Set rows × columns  
+4. Apply grid  
+5. Layout auto-saves for next time
 
 ---
 
