@@ -26,7 +26,7 @@ Download the latest release ZIP from your GitHub repo:
 Or clone:
 
 ```bash
-git clone https://github.com/smartboy223/browser-extention-Smart-Grid-View-/tree/main).git
+git clone https://github.com/smartboy223/browser-extention-Smart-Grid-View.git
 ```
 
 ---
