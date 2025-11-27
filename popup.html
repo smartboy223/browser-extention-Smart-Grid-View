@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Grid Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="popup-body">
+  <h1 class="popup-title">Smart Grid Viewer</h1>
+
+  <!-- Tab controls -->
+  <div class="section card controls-row">
+    <button id="refresh-tabs" class="secondary-button">Refresh Tabs</button>
+    <button id="select-all" class="secondary-button">Select All</button>
+    <button id="deselect-all" class="secondary-button">Deselect All</button>
+    <span id="selected-count" class="selected-count">Selected: 0</span>
+  </div>
+
+  <div class="section card">
+    <label class="label">Tabs in this grid (drag rows to reorder, rename labels):</label>
+    <div class="save-row">
+      <input id="filter-tabs" type="text" class="grid-name-input" placeholder="Filter tabs by text or URL">
+      <button id="clear-filter" class="secondary-button">Clear</button>
+    </div>
+    <div id="tabs-container" class="tabs-container"></div>
+  </div>
+
+  <!-- Layout presets -->
+  <div class="section card">
+    <label class="label">Layout:</label>
+    <div class="layout-options">
+      <label class="layout-option">
+        <input type="radio" name="layout" value="auto" checked>
+        <span class="layout-text">Auto</span>
+      </label>
+      <label class="layout-option">
+        <input type="radio" name="layout" value="twoColumns">
+        <span class="layout-text">Split</span>
+      </label>
+      <label class="layout-option">
+        <input type="radio" name="layout" value="fourGrid">
+        <span class="layout-text">2 × 2</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Save / load grids -->
+  <div class="section card">
+    <label class="label">Save current grid as profile:</label>
+    <div class="save-row">
+      <input id="grid-name" type="text" class="grid-name-input" placeholder="Grid name (e.g. template, task, monitor)">
+      <button id="save-grid" class="secondary-button">Save Grid</button>
+    </div>
+    <button id="load-last" class="secondary-button full-width">Load Last Session</button>
+  </div>
+
+  <div class="section card">
+    <label class="label">Saved grids:</label>
+    <div class="save-row">
+      <input id="saved-search" type="text" class="grid-name-input" placeholder="Search saved grids">
+      <button id="clear-saved-search" class="secondary-button">Clear</button>
+    </div>
+    <div id="saved-grids-container" class="saved-grids-container">
+      <!-- Saved grids list populated here -->
+    </div>
+  </div>
+
+  <div class="section card popup-footer">
+    <button id="open-grid" class="primary-button">Open / Update Grid View</button>
+  </div>
+
+  <div id="error-message" class="error-message"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Smart Grid Viewer",
+  "version": "5.0",
+  "description": "Manage and save multiple tab grids with custom labels, layouts, and autosave.",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+  "default_title": "Smart Grid Viewer"
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}

@@ -1,0 +1,23 @@
+Project Files Overview
+
+grid.html
+- Markup for the grid page and the top-right controls bar.
+
+styles.css
+- Visual theme variables, grid layout styles, labels, and toolbar styles.
+- Pointer rules to keep the page clickable behind overlays.
+- Drag-mode rules to make reordering smooth.
+
+grid.js
+- Applies layouts, handles zoom/fit/aspect, and manages cell creation.
+- Implements drag-and-drop reordering and storage persistence.
+- Keeps the controls bar size stable across zoom levels.
+
+Storage Keys (local)
+- tabGridConfig: tabs and layout info.
+- tabGridFit: fit mode and target dimensions.
+- tabGridAspect: fill or square.
+- tabGridZoom: current page zoom.
+
+Notes
+- Some sites may block embedding; use the cell’s Open button.

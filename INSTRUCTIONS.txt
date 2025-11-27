@@ -1,0 +1,40 @@
+Multi-Tab Grid — Quick Guide
+
+Purpose
+- View multiple websites in a grid and control layout, zoom, and fit.
+
+Controls (top-right bar)
+- Theme: switch between dark/light.
+- Fit: cycles native → contain → cover to fit site content inside each cell.
+- Aspect: toggle fill ↔ square to change cell proportions.
+- Zoom In/Out: scales the whole grid; toolbar size stays constant.
+- Auto-hide: the bar hides after ~20s of inactivity and reappears on move/click.
+
+Labels and Dragging
+- Each cell has a small centered label for the site name.
+- Drag the cell using the small round grab handle next to the label text.
+- The label itself is click-through so the website beneath stays interactive.
+
+Reordering Cells
+- Click and drag a cell (using the grab handle) over another cell.
+- When dragging, the website content is temporarily non-interactive to ensure smooth reordering.
+- Release to drop; layout and storage update automatically.
+
+Cell Actions
+- Hover a cell to reveal its small buttons:
+- Open: opens the site in a new browser tab.
+- Reload: refreshes the site inside the cell.
+- Only the buttons are clickable; empty overlay areas allow clicks to pass through.
+
+Zoom and Readability
+- Page zoom is saved per grid view; labels scale to remain readable.
+- The toolbar uses inverse scaling so it doesn’t shrink or crowd when you zoom out.
+
+Troubleshooting
+- Can’t click the site: ensure you’re not clicking directly on a button or grab handle.
+- Site won’t load (blocked embedding): use the Open button; some sites set X-Frame-Options/CSP.
+- Drag not working: start drag from the grab handle; try different zoom levels.
+
+Notes
+- Your layout and settings persist using local browser storage.
+- This grid page is designed to keep interactive website controls accessible.
