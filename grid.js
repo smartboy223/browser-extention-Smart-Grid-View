@@ -17,13 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let layoutCols = 0;
   let layoutRows = 0;
   let baseDPR = window.devicePixelRatio || 1;
+  let zoomScale = 1;
 
   function updateOverlayScales() {
-    const zoom = Number(document.body.style.zoom) || 1;
     const dpr = window.devicePixelRatio || 1;
-    const relative = (baseDPR / dpr) * (1 / zoom);
+    const relative = baseDPR / dpr;
     document.body.style.setProperty('--header-scale', String(relative));
-    if (controlsBar) controlsBar.style.zoom = String(1 / zoom);
+    if (controlsBar) controlsBar.style.zoom = '';
   }
 
   function clearGrid() {
@@ -232,30 +232,36 @@ document.addEventListener('DOMContentLoaded', () => {
     cells.forEach((cell) => {
       const iframe = cell.querySelector('iframe');
       if (!iframe) return;
+      const cw = cell.clientWidth;
+      const ch = cell.clientHeight;
       if (fitState.enabled && fitState.mode !== 'native') {
-        const cw = cell.clientWidth;
-        const ch = cell.clientHeight;
         const sw = cw / fitState.targetWidth;
         const sh = ch / fitState.targetHeight;
-        let scale;
+        let scaleFit;
         if (fitState.mode === 'contain') {
-          scale = Math.min(sw, sh);
+          scaleFit = Math.min(sw, sh);
         } else {
-          scale = Math.max(sw, sh);
+          scaleFit = Math.max(sw, sh);
         }
-        scale = Math.min(scale, 1);
-        const contentW = fitState.targetWidth * scale;
-        const contentH = fitState.targetHeight * scale;
+        const finalScale = scaleFit * zoomScale;
+        const renderW = fitState.targetWidth / finalScale;
+        const renderH = fitState.targetHeight / finalScale;
+        const contentW = fitState.targetWidth * finalScale;
+        const contentH = fitState.targetHeight * finalScale;
         const offsetX = Math.round((cw - contentW) / 2);
         const offsetY = Math.round((ch - contentH) / 2);
         iframe.style.transformOrigin = 'top left';
-        iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
-        iframe.style.width = `${fitState.targetWidth}px`;
-        iframe.style.height = `${fitState.targetHeight}px`;
+        iframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${finalScale})`;
+        iframe.style.width = `${renderW}px`;
+        iframe.style.height = `${renderH}px`;
       } else {
-        iframe.style.transform = '';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
+        const finalScale = zoomScale;
+        const renderW = cw / finalScale;
+        const renderH = ch / finalScale;
+        iframe.style.transformOrigin = 'top left';
+        iframe.style.transform = `scale(${finalScale})`;
+        iframe.style.width = `${renderW}px`;
+        iframe.style.height = `${renderH}px`;
       }
     });
   }
@@ -309,11 +315,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (aspect === 'square' || aspect === 'fill') {
         fitState.aspect = aspect;
       }
-      // Force native (real 100%) scale by default
       fitState.enabled = false;
       fitState.mode = 'native';
       const zoomState = typeof fit.tabGridZoom === 'number' ? fit.tabGridZoom : 1;
-      document.body.style.zoom = String(zoomState);
+      zoomScale = zoomState;
       updateOverlayScales();
       chrome.storage.local.set({ tabGridFit: fitState, tabGridZoom: zoomState }, () => {});
       applyLayout(data.tabGridConfig);
@@ -367,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function setZoom(next) {
     const v = Math.max(0.33, Math.min(2, next));
-    document.body.style.zoom = String(v);
+    zoomScale = v;
     chrome.storage.local.set({ tabGridZoom: v }, () => {});
     updateOverlayScales();
     applyAspectMode();
@@ -375,18 +380,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (zoomInBtn) {
     zoomInBtn.addEventListener('click', () => {
-      const current = Number(document.body.style.zoom) || 1;
+      const current = zoomScale || 1;
       const step = current >= 1 ? 0.15 : 0.1;
       setZoom(current + step);
-      zoomInBtn.title = `Zoom In (${Math.round((Number(document.body.style.zoom)||1) * 100)}%)`;
+      zoomInBtn.title = `Zoom In (${Math.round((zoomScale||1) * 100)}%)`;
     });
   }
   if (zoomOutBtn) {
     zoomOutBtn.addEventListener('click', () => {
-      const current = Number(document.body.style.zoom) || 1;
+      const current = zoomScale || 1;
       const step = current > 1 ? 0.15 : 0.1;
       setZoom(current - step);
-      zoomOutBtn.title = `Zoom Out (${Math.round((Number(document.body.style.zoom)||1) * 100)}%)`;
+      zoomOutBtn.title = `Zoom Out (${Math.round((zoomScale||1) * 100)}%)`;
     });
   }
   window.addEventListener('resize', () => {

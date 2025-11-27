@@ -393,6 +393,7 @@ shadow *, *::before, *::after {
   top: 0;
   left: 0;
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .grid-cell-controls {
